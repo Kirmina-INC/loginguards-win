@@ -1,6 +1,6 @@
 {
   "name": "@loginguards/loginguards-win",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "LoginGuards Active Directory Password Protection for Windows",
   "private": false,
   "license": "SEE LICENSE IN LICENSE",
