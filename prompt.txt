@@ -1,0 +1,321 @@
+LoginGuards Active Directory Plugin
+Professional AI Coder Brief (From Zero → Production Product)
+1. Product Overview
+
+Product Name (working):
+@loginguards/loginguards-win
+
+Purpose:
+Create a Windows Active Directory password protection plugin, distributed as an npm package, that prevents compromised passwords from being set or reset in an Active Directory domain by checking them against the LoginGuards API in real time.
+
+This product will be marketed as an enterprise-grade security extension for Windows environments.
+
+2. Core Security Concept
+
+The plugin enforces Zero Trust password validation
+
+Every password set or reset in Active Directory must be validated
+
+Passwords are checked before acceptance
+
+If compromised → reject password
+
+If safe → allow password
+
+The plugin integrates with LoginGuards
+
+No secrets or passwords are stored locally
+
+3. Architecture Overview
+Components
+
+Node.js / npm package
+
+Windows-native execution (PowerShell + Node.js)
+
+Active Directory integration via password change hooks
+
+LoginGuards API client
+
+CLI-based installer (no GUI required)
+
+4. API Integration (Critical)
+Base URL
+https://api.loginguards.com/v1
+
+Required Endpoint (Core Feature)
+
+Use plaintext password check:
+
+POST /v1/check/plain
+
+
+This endpoint is used ONLY at password set / reset time.
+
+Passwords must never be logged or persisted.
+
+Authentication
+
+API key required
+
+Passed via HTTP header:
+
+x-api-key: <LOGIN_GUARDS_API_KEY>
+
+5. Plugin Functional Flow (Very Important)
+Password Reset Flow
+
+User attempts to set or reset a password in Active Directory
+
+AD triggers a password change event
+
+Plugin intercepts the event
+
+Plugin sends the password to:
+
+POST /v1/check/plain
+
+
+API response:
+
+compromised: true → reject password
+
+compromised: false → allow password
+
+Active Directory continues or blocks the operation accordingly
+
+6. npm Package Responsibilities
+Installation
+
+Installed globally via:
+
+npm install -g @loginguards/loginguards-win
+
+CLI Commands (Required)
+loginguards-win install
+loginguards-win configure
+loginguards-win test
+loginguards-win uninstall
+
+7. Installer Behavior (CLI Wizard)
+loginguards-win install
+
+Must:
+
+Check Windows version
+
+Check Node.js availability
+
+Verify administrator privileges
+
+Register Active Directory password hook
+
+Install required Windows service or scheduled task
+
+Ensure plugin is active domain-wide
+
+loginguards-win configure
+
+Must prompt for:
+
+LoginGuards API key
+
+Optional organization / project identifier
+
+Network connectivity test to LoginGuards API
+
+Firewall validation (outbound HTTPS allowed)
+
+Configuration storage must be secure:
+
+Windows Credential Manager OR
+
+Encrypted local configuration file
+
+loginguards-win test (Enhanced Requirement)
+
+This command must:
+
+Run from any PC inside the Active Directory network
+
+Validate:
+
+Connection to the domain controller
+
+Synchronization with the AD password policy hook
+
+Connectivity to LoginGuards API
+
+Send a real test request to the LoginGuards server
+
+Simulate a password reset test (non-destructive)
+
+Display result clearly:
+
+Example output:
+
+✔ Connected to Active Directory
+✔ LoginGuards API reachable
+✔ Password policy hook active
+✔ Test password evaluated: NOT COMPROMISED
+✔ Test completed successfully for user "DOMAIN\\test-user"
+
+
+If compromised:
+
+✔ Test completed
+✖ Password rejected: COMPROMISED
+
+
+This confirms end-to-end synchronization across the domain.
+
+loginguards-win uninstall
+
+Must:
+
+Remove AD password hook
+
+Stop and remove Windows service / task
+
+Remove stored credentials securely
+
+Restore system to pre-installation state
+
+8. Active Directory Integration Strategy
+Preferred Method (Safe & Supported)
+
+Use Windows Password Filter mechanism
+
+Node.js acts as policy / decision engine
+
+PowerShell bridge communicates with Node.js process
+
+No plaintext passwords written to disk
+
+Node.js performs decision logic
+Windows performs enforcement
+
+9. Security Requirements (Strict)
+
+NEVER log plaintext passwords
+
+NEVER store passwords
+
+Encrypted API key storage
+
+HTTPS only (TLS)
+
+Graceful failure handling:
+
+API unreachable → configurable:
+
+fail-open OR
+
+fail-closed
+
+10. Logging & Auditing
+
+Logs must include:
+
+Timestamp
+
+Username (optional / configurable)
+
+Result (allowed / blocked)
+
+API status
+
+Logs must never include passwords or hashes.
+
+11. Error Handling
+
+Must handle:
+
+API downtime
+
+Rate limiting
+
+Invalid API key
+
+Network failure
+
+Behavior must be configurable:
+
+Reject password
+
+Allow password
+
+Retry with backoff
+
+12. Packaging & Distribution
+
+npm package (scoped to LoginGuards)
+
+Semantic versioning
+
+README must include:
+
+Installation
+
+Configuration
+
+Active Directory requirements
+
+Security guarantees
+
+13. Marketing & Product Positioning (Context)
+
+Marketed as:
+
+“LoginGuards Active Directory Password Protection”
+
+Enterprise-grade password breach prevention for Windows domains.
+
+Key Selling Points
+
+Zero Trust security model
+
+No password storage
+
+API-based intelligence
+
+Works across entire AD domain
+
+Simple npm installation
+
+Centralized enforcement
+
+14. Final Deliverables
+
+AI coder must deliver:
+
+Production-ready npm package
+
+CLI installer
+
+Active Directory integration logic
+
+LoginGuards API client
+
+Documentation
+
+Security review notes
+
+15. Success Criteria
+
+The project is successful when:
+
+Admin installs plugin in minutes
+
+All domain password resets are protected
+
+Compromised passwords are blocked
+
+No user passwords are stored or leaked
+
+Plugin is ready for commercial sale
+
+Final Note (Important)
+
+This product is NOT a demo.
+It is a commercial security extension for Windows Active Directory and must be built with enterprise-grade discipline, security, and reliability.

@@ -1,0 +1,2 @@
+2026-01-08 04:34:56 - Starting C:\Users\Samer\AppData\Local\Volta\tools\image\node\24.3.0\node.exe  --harmony "D:\projects\backend\fast-Backend (1)\New 0\node_modules\.pnpm\node-windows@1.0.0-beta.8\node_modules\node-windows\lib\wrapper.js" --file "D:\projects\backend\fast-Backend (1)\New 0\src\service\engine.js" --scriptoptions= --log "LoginGuardsPolicyEngine wrapper" --grow 0.5 --wait 2 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2026-01-08 04:34:56 - Started 15000

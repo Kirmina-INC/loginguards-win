@@ -1,0 +1,49 @@
+﻿LoginGuards Proprietary License
+
+Copyright (c) 2026 LoginGuards. All rights reserved.
+
+IMPORTANT: PLEASE READ THIS LICENSE CAREFULLY BEFORE INSTALLING OR USING THE SOFTWARE.
+
+1. Definitions
+   - "Software" means the LoginGuards Active Directory Password Protection plugin for Windows, including all source code, binaries, scripts, documentation, and updates provided by LoginGuards.
+   - "You" or "Licensee" means the entity or individual that installs or uses the Software.
+
+2. Grant of License
+   Subject to the terms of this License, LoginGuards grants You a limited, non-exclusive, non-transferable, revocable license to install and use the Software within Your Windows Active Directory environment solely for Your internal business purposes.
+
+3. Restrictions
+   You shall not, and shall not permit any third party to:
+   - copy, publish, distribute, or make the Software available to any third party (including by making it publicly available), except as expressly permitted by LoginGuards in writing;
+   - sublicense, rent, lease, or otherwise transfer rights to the Software;
+   - modify, adapt, translate, or create derivative works of the Software, except to the extent expressly permitted by applicable law notwithstanding this restriction;
+   - reverse engineer, decompile, disassemble, or otherwise attempt to derive source code from any non-source component of the Software, except to the extent expressly permitted by applicable law notwithstanding this restriction;
+   - remove, alter, or obscure any proprietary notices (including copyright and trademark notices) of LoginGuards or its suppliers.
+
+4. Ownership
+   The Software is licensed, not sold. LoginGuards and its licensors retain all right, title, and interest in and to the Software and all intellectual property rights therein.
+
+5. Confidentiality; Security
+   The Software may process sensitive information (e.g., user passwords) in memory for validation purposes. You agree not to log, store, or otherwise persist plaintext passwords and to operate the Software in accordance with security best practices. Configuration secrets (e.g., API keys) must be stored securely. The Software may integrate with third-party services (e.g., LoginGuards API) as configured by You.
+
+6. Support and Updates
+   This License does not obligate LoginGuards to provide support, maintenance, or updates unless otherwise agreed in a separate written agreement.
+
+7. Disclaimer of Warranties
+   THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. LOGINGUARDS DOES NOT WARRANT THAT THE SOFTWARE WILL BE ERROR-FREE OR UNINTERRUPTED.
+
+8. Limitation of Liability
+   TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL LOGINGUARDS OR ITS LICENSORS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUE, ARISING OUT OF OR IN CONNECTION WITH THIS LICENSE OR THE USE OF THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. LOGINGUARDS' TOTAL LIABILITY FOR ALL CLAIMS SHALL NOT EXCEED THE AMOUNTS ACTUALLY PAID BY YOU (IF ANY) FOR THE SOFTWARE IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO THE CLAIM.
+
+9. Term and Termination
+   This License is effective until terminated. LoginGuards may terminate this License immediately upon notice if You breach any term herein. Upon termination, You must cease all use of the Software and destroy all copies in Your possession or control.
+
+10. Export Compliance
+   You represent that You are not located in, under the control of, or a national or resident of any country subject to embargo or sanctions and that You will not export or re-export the Software in violation of applicable export laws and regulations.
+
+11. Governing Law
+   This License shall be governed by and construed in accordance with the laws of the State of California, without regard to its conflicts of law principles, and the federal courts located in Santa Clara County, California shall have exclusive jurisdiction.
+
+12. Entire Agreement
+   This License constitutes the entire agreement between the parties with respect to the Software and supersedes all prior or contemporaneous understandings.
+
+If You do not agree to these terms, do not install or use the Software.

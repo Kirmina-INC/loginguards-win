@@ -1,0 +1,51 @@
+{
+  "name": "@loginguards/loginguards-win",
+  "version": "0.1.0",
+  "description": "LoginGuards Active Directory Password Protection for Windows",
+  "private": false,
+  "license": "SEE LICENSE IN LICENSE",
+  "bin": {
+    "loginguards-win": "bin/loginguards-win.js"
+  },
+  "main": "src/index.js",
+  "type": "commonjs",
+  "os": ["win32"],
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "active-directory",
+    "password",
+    "security",
+    "windows",
+    "login",
+    "policy",
+    "breach",
+    "zerotrust"
+  ],
+  "author": "LoginGuards",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "inquirer": "^9.2.12",
+    "node-windows": "^1.0.0-beta.6",
+    "winston": "^3.10.0",
+    "yargs": "^17.7.2"
+  },
+  "optionalDependencies": {
+    "keytar": "^7.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node bin/loginguards-win.js"
+  }
+}
