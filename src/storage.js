@@ -62,16 +62,40 @@ async function dpapiProtect(plain) {
   $plain = @'
 ${plain.replace(/'/g, "''")}
 '@
-  $bytes = [System.Text.Encoding]::UTF8.GetBytes($plain)
-  $enc = [System.Security.Cryptography.ProtectedData]::Protect($bytes, $null, [System.Security.Cryptography.DataProtectionScope]::LocalMachine)
-  [Convert]::ToBase64String($enc)
+  try { Add-Type -AssemblyName 'System.Security' -ErrorAction SilentlyContinue } catch {}
+  try {
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($plain)
+    $enc = [System.Security.Cryptography.ProtectedData]::Protect($bytes, $null, [System.Security.Cryptography.DataProtectionScope]::LocalMachine)
+    [Convert]::ToBase64String($enc)
+  } catch {
+    try {
+      $secure = ConvertTo-SecureString $plain -AsPlainText -Force
+      $hasScope = (Get-Command ConvertFrom-SecureString).Parameters.ContainsKey('Scope')
+      if ($hasScope) { $encStr = ConvertFrom-SecureString $secure -Scope LocalMachine } else { $encStr = ConvertFrom-SecureString $secure }
+      'SS:' + $encStr
+    } catch { throw }
+  }
   `;
   const { stdout } = await runPS(script);
   return stdout.trim();
 }
 
 async function dpapiUnprotect(b64) {
+  if (b64.startsWith('SS:')) {
+    const encStr = b64.slice(3);
+    const scriptSS = `
+    $encStr = @'
+${encStr.replace(/'/g, "''")}
+'@
+    $secure = ConvertTo-SecureString $encStr
+    $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
+    [Runtime.InteropServices.Marshal]::PtrToStringUni($bstr)
+    `;
+    const { stdout } = await runPS(scriptSS);
+    return stdout.replace(/\r?\n$/, '');
+  }
   const script = `
+  try { Add-Type -AssemblyName 'System.Security' -ErrorAction SilentlyContinue } catch {}
   $b64 = '${b64.replace(/'/g, "''")}'
   $bytes = [Convert]::FromBase64String($b64)
   $dec = [System.Security.Cryptography.ProtectedData]::Unprotect($bytes, $null, [System.Security.Cryptography.DataProtectionScope]::LocalMachine)
