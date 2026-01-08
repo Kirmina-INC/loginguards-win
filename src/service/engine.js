@@ -23,7 +23,12 @@ async function evaluatePassword(password) {
   }
   try {
     const res = await apiClient.checkPlain(password, apiKey);
-    const compromised = !!res.compromised;
+    const compromised = (typeof res.breached !== 'undefined') ? !!res.breached
+      : (typeof res.compromised !== 'undefined') ? !!res.compromised
+      : (typeof res.is_compromised !== 'undefined') ? !!res.is_compromised
+      : (typeof res.isCompromised !== 'undefined') ? !!res.isCompromised
+      : (typeof res.count === 'number') ? res.count > 0
+      : false;
     return { allow: !compromised, reason: compromised ? 'compromised' : 'ok' };
   } catch (e) {
     logger.warn(`API error during evaluation: ${e.status || e.code || e.message}`);

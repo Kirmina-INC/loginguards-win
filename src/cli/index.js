@@ -11,6 +11,7 @@ async function run(argvInput) {
     .usage('$0 <cmd> [args]')
     .command(require('./commands/install'))
     .command(require('./commands/configure'))
+    .command(require('./commands/check'))
     .command(require('./commands/test'))
     .command(require('./commands/pipe-test'))
     .command(require('./commands/uninstall'))
