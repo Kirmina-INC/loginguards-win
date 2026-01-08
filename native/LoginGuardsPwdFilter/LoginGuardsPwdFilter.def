@@ -1,0 +1,5 @@
+LIBRARY "LoginGuardsPwdFilter"
+EXPORTS
+    InitializeChangeNotify @1
+    PasswordFilter @2
+    PasswordChangeNotify @3

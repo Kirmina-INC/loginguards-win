@@ -1,6 +1,6 @@
 {
   "name": "@loginguards/loginguards-win",
-  "version": "0.1.3",
+  "version": "2.0.0",
   "description": "LoginGuards Active Directory Password Protection for Windows",
   "private": false,
   "license": "SEE LICENSE IN LICENSE",
@@ -22,6 +22,7 @@
   "files": [
     "bin",
     "src",
+    "assets",
     "README.md",
     "LICENSE"
   ],

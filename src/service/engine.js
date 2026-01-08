@@ -16,28 +16,31 @@ function parseJsonLine(buf) {
 }
 
 async function evaluatePassword(password) {
-  const { failMode } = getConfig();
+  const { failMode, timeoutMs } = getConfig();
   const apiKey = await storage.getApiKey();
   if (!apiKey) {
-    return { allow: failMode === 'fail-open', reason: 'no_api_key' };
+    return { allow: failMode === 'fail-open', reason: 'NO_API_KEY' };
   }
   try {
-    const res = await apiClient.checkPlain(password, apiKey);
+    const res = await apiClient.checkPlain(password, apiKey, { timeoutMs });
     const compromised = (typeof res.breached !== 'undefined') ? !!res.breached
       : (typeof res.compromised !== 'undefined') ? !!res.compromised
       : (typeof res.is_compromised !== 'undefined') ? !!res.is_compromised
       : (typeof res.isCompromised !== 'undefined') ? !!res.isCompromised
       : (typeof res.count === 'number') ? res.count > 0
       : false;
-    return { allow: !compromised, reason: compromised ? 'compromised' : 'ok' };
+    return { allow: !compromised, reason: compromised ? 'COMPROMISED' : 'SAFE' };
   } catch (e) {
-    logger.warn(`API error during evaluation: ${e.status || e.code || e.message}`);
-    return { allow: failMode === 'fail-open', reason: 'api_error' };
+    const msg = e && (e.code || e.message || e.toString());
+    const isTimeout = (e && e.code === 'ECONNABORTED') || (typeof msg === 'string' && msg.toLowerCase().includes('timeout'));
+    const reason = isTimeout ? 'TIMEOUT' : 'API_DOWN';
+    logger.warn(`API error during evaluation: ${msg}`);
+    return { allow: failMode === 'fail-open', reason };
   }
 }
 
 function startPipeServer() {
-  const { pipeName } = getConfig();
+  const { pipeName, logUsername } = getConfig();
   const server = net.createServer((socket) => {
     let buffer = '';
     socket.on('data', async (chunk) => {
@@ -48,13 +51,19 @@ function startPipeServer() {
         buffer = buffer.slice(idx + 1);
         const msg = parseJsonLine(Buffer.from(line, 'utf8'));
         if (!msg || typeof msg.password !== 'string') {
-          socket.write(JSON.stringify({ allow: false, reason: 'bad_request' }) + '\n');
+          socket.write(JSON.stringify({ allow: false, reason: 'BAD_REQUEST' }) + '\n');
           continue;
         }
+        const user = (msg && typeof msg.username === 'string') ? msg.username : undefined;
+        const op = (msg && typeof msg.op === 'string') ? msg.op : 'change';
+
         const { allow, reason } = await evaluatePassword(msg.password);
         // Never log plaintext passwords
-        if (reason === 'compromised') logger.info('Password evaluation: compromised');
-        else logger.info(`Password evaluation result: ${reason}`);
+        if (logUsername && user) {
+          logger.info(`Password evaluation: ${reason}; user=${user}; op=${op}`);
+        } else {
+          logger.info(`Password evaluation: ${reason}; op=${op}`);
+        }
         socket.write(JSON.stringify({ allow, reason }) + '\n');
       }
     });

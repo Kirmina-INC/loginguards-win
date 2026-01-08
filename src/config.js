@@ -27,9 +27,10 @@ function writeConfigFile(obj) {
 function getConfig() {
   const data = readConfigFile();
   return {
-    failMode: data.failMode || 'fail-closed',
+    failMode: data.failMode || 'fail-open',
     pipeName: data.pipeName || "\\\\.\\pipe\\LoginGuardsPwdFilter",
     logUsername: !!data.logUsername,
+    timeoutMs: typeof data.timeoutMs === 'number' && data.timeoutMs > 0 ? data.timeoutMs : 1500,
     apiKeyEnc: data.apiKeyEnc || undefined
   };
 }

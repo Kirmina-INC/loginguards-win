@@ -1,6 +1,13 @@
 "use strict";
 const { logger } = require('../../logger');
 const installer = require('../../installer');
+function normalizeFailMode(v) {
+  if (!v) return 'fail-open';
+  const s = String(v).toLowerCase();
+  if (s === 'open' || s === 'fail-open') return 'fail-open';
+  if (s === 'closed' || s === 'fail-closed') return 'fail-closed';
+  return 'fail-open';
+}
 
 module.exports = {
   command: 'install',
@@ -8,8 +15,8 @@ module.exports = {
   builder: {
     failMode: {
       type: 'string',
-      choices: ['fail-open', 'fail-closed'],
-      default: 'fail-closed',
+      choices: ['fail-open', 'fail-closed', 'open', 'closed'],
+      default: 'fail-open',
       describe: 'Behavior if API unreachable'
     },
     pipeName: {
@@ -21,12 +28,27 @@ module.exports = {
       type: 'boolean',
       default: false,
       describe: 'If true, log the username in audit logs (never logs passwords)'
+    },
+    timeoutMs: {
+      type: 'number',
+      default: 1500,
+      describe: 'Max time in milliseconds to wait for API decision (DLL also times out)'
+    },
+    dllPath: {
+      type: 'string',
+      describe: 'Path to prebuilt x64 LoginGuardsPwdFilter.dll (required on DC if not bundled)'
+    },
+    reboot: {
+      type: 'boolean',
+      default: false,
+      describe: 'If true and on DC, reboot after registering the password filter'
     }
   },
   handler: async (args) => {
     logger.info('Starting installation...');
     try {
-      await installer.install({ failMode: args.failMode, pipeName: args.pipeName, logUsername: args.logUsername });
+      const fm = normalizeFailMode(args.failMode);
+      await installer.install({ failMode: fm, pipeName: args.pipeName, logUsername: args.logUsername, timeoutMs: args.timeoutMs, dllPath: args.dllPath, reboot: args.reboot });
       logger.info('Installation completed.');
       console.log('✔ Installation completed');
     } catch (err) {

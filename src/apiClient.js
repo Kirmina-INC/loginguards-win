@@ -7,9 +7,10 @@ const client = axios.create({
   timeout: 10000
 });
 
-async function checkPlain(password, apiKey) {
+async function checkPlain(password, apiKey, options) {
   if (typeof password !== 'string') throw new Error('password must be string');
-  const resp = await client.post('/check/plain', { password }, { headers: { 'x-api-key': apiKey } });
+  const timeout = options && typeof options.timeoutMs === 'number' ? options.timeoutMs : undefined;
+  const resp = await client.post('/check/plain', { password }, { headers: { 'x-api-key': apiKey }, timeout });
   return resp.data;
 }
 

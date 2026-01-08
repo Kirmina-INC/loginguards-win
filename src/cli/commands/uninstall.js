@@ -5,10 +5,12 @@ const installer = require('../../installer');
 module.exports = {
   command: 'uninstall',
   describe: 'Uninstall the plugin and remove all components',
-  builder: {},
-  handler: async () => {
+  builder: {
+    reboot: { type: 'boolean', default: false, describe: 'If true (on DC), reboot after unregistering the password filter' }
+  },
+  handler: async (args) => {
     try {
-      await installer.uninstall();
+      await installer.uninstall({ reboot: args.reboot });
       console.log('✔ Uninstall completed');
     } catch (err) {
       logger.error(`Uninstall failed: ${err.stack || err.message || err}`);

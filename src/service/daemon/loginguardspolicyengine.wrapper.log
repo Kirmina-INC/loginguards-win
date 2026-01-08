@@ -1,2 +1,18 @@
 2026-01-08 04:34:56 - Starting C:\Users\Samer\AppData\Local\Volta\tools\image\node\24.3.0\node.exe  --harmony "D:\projects\backend\fast-Backend (1)\New 0\node_modules\.pnpm\node-windows@1.0.0-beta.8\node_modules\node-windows\lib\wrapper.js" --file "D:\projects\backend\fast-Backend (1)\New 0\src\service\engine.js" --scriptoptions= --log "LoginGuardsPolicyEngine wrapper" --grow 0.5 --wait 2 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
 2026-01-08 04:34:56 - Started 15000
+2026-01-08 20:19:43 - Stopping loginguardspolicyengine.exe
+2026-01-08 20:19:43 - ProcessKill 15000
+2026-01-08 20:19:43 - Found child process: 7540 Name: conhost.exe
+2026-01-08 20:19:43 - Found child process: 15148 Name: node.exe
+2026-01-08 20:19:43 - Stopping process 7540
+2026-01-08 20:19:43 - Send SIGINT 7540
+2026-01-08 20:19:43 - SIGINT to 7540 failed - Killing as fallback
+2026-01-08 20:19:43 - Stopping process 15148
+2026-01-08 20:19:43 - Send SIGINT 15148
+2026-01-08 20:19:43 - SIGINT to 15148 failed - Killing as fallback
+2026-01-08 20:19:43 - Stopping process 15000
+2026-01-08 20:19:43 - Send SIGINT 15000
+2026-01-08 20:19:43 - SIGINT to 15000 failed - Killing as fallback
+2026-01-08 20:19:43 - Finished loginguardspolicyengine.exe
+2026-01-08 20:19:43 - Starting C:\Users\Samer\AppData\Local\Volta\tools\image\node\24.3.0\node.exe  --harmony "D:\projects\backend\fast-Backend (1)\New 0\node_modules\.pnpm\node-windows@1.0.0-beta.8\node_modules\node-windows\lib\wrapper.js" --file "D:\projects\backend\fast-Backend (1)\New 0\src\service\engine.js" --scriptoptions= --log "LoginGuardsPolicyEngine wrapper" --grow 0.5 --wait 2 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2026-01-08 20:19:43 - Started 13552
