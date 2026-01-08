@@ -13,11 +13,13 @@ Enterprise-grade password breach prevention for Windows domains.
 ## Install (development)
 
 ```bash
-npm install -g .
+npm i -g @loginguards/loginguards-win
 loginguards-win configure
 loginguards-win install
 loginguards-win test
+loginguards-win --help
 ```
+
 
 ## Configuration
 
