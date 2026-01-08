@@ -16,3 +16,19 @@
 2026-01-08 20:19:43 - Finished loginguardspolicyengine.exe
 2026-01-08 20:19:43 - Starting C:\Users\Samer\AppData\Local\Volta\tools\image\node\24.3.0\node.exe  --harmony "D:\projects\backend\fast-Backend (1)\New 0\node_modules\.pnpm\node-windows@1.0.0-beta.8\node_modules\node-windows\lib\wrapper.js" --file "D:\projects\backend\fast-Backend (1)\New 0\src\service\engine.js" --scriptoptions= --log "LoginGuardsPolicyEngine wrapper" --grow 0.5 --wait 2 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
 2026-01-08 20:19:43 - Started 13552
+2026-01-08 22:08:14 - Stopping loginguardspolicyengine.exe
+2026-01-08 22:08:14 - ProcessKill 13552
+2026-01-08 22:08:14 - Shutdown exception
+Message:Class not registered
+
+Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at System.Management.ManagementScope.InitializeGuts(Object o)
+   at System.Management.ManagementScope.Initialize()
+   at System.Management.ManagementObjectSearcher.Initialize()
+   at System.Management.ManagementObjectSearcher.Get()
+   at winsw.WrapperService.GetChildPids(Int32 pid)
+   at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   at winsw.WrapperService.StopIt()
+   at winsw.WrapperService.OnShutdown()
+2026-01-08 22:08:54 - Starting C:\Users\Samer\AppData\Local\Volta\tools\image\node\24.3.0\node.exe  --harmony "D:\projects\backend\fast-Backend (1)\New 0\node_modules\.pnpm\node-windows@1.0.0-beta.8\node_modules\node-windows\lib\wrapper.js" --file "D:\projects\backend\fast-Backend (1)\New 0\src\service\engine.js" --scriptoptions= --log "LoginGuardsPolicyEngine wrapper" --grow 0.5 --wait 2 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2026-01-08 22:08:54 - Started 7116
