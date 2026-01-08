@@ -1,6 +1,6 @@
 {
   "name": "@loginguards/loginguards-win",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "LoginGuards Active Directory Password Protection for Windows",
   "private": false,
   "license": "SEE LICENSE IN LICENSE",
@@ -9,7 +9,9 @@
   },
   "main": "src/index.js",
   "type": "commonjs",
-  "os": ["win32"],
+  "os": [
+    "win32"
+  ],
   "engines": {
     "node": ">=18"
   },
